@@ -1,0 +1,162 @@
+*{
+    outline: none;
+    --main-bg-color: #FF5555;
+    --border-main-color: #D9D9D9;
+    --input-focus-color: #000000;
+    --input-disabled-color: #7E7E7E;
+    --secondary-card-color: #7E7E7E;
+    --card-hover-color: #B6B6B640;
+    --first-letter-color: #FFFFFF;
+    --company-hover-color: #208FBF;;
+}
+
+.grid {
+    left: 20px;
+    top: 20px;
+    box-sizing: border-box;
+    position: absolute;
+    display: grid;
+}
+
+.search-line {
+    height: 70px;
+}
+
+.git-name {
+    display: block;
+    height: 50px;
+    width: 295px;
+    border: 1px solid var(--border-main-color);
+    box-sizing: border-box;
+    border-radius: 6px;
+    padding-left: 12px;
+    font-family: Roboto, serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0;
+    text-align: left;
+    position: absolute;
+}
+
+.git-name:focus {
+    border: 1px solid var(--main-bg-color);
+    color: var(--input-focus-color);
+}
+
+.git-name:disabled {
+    color: var(--input-disabled-color);
+}
+
+.search-button {
+    height: 50px;
+    width: 50px;
+    box-sizing: border-box;
+    background: var(--main-bg-color);
+    border-radius: 6px;
+    margin: 0 0 0 307px;
+    position: absolute;
+    border: none;
+    display: inline;
+}
+
+.search-button:hover {
+    box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
+}
+
+.search-button:disabled {
+    background: var(--border-main-color);
+}
+
+.box {
+    display: flex;
+    height: 104px;
+    width: 357px;
+    border-radius: 6px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    border: 1px solid var(--border-main-color);
+}
+
+.box:hover {
+    box-shadow: 0 2px 6px 0 var(--card-hover-color);
+}
+
+.first-company-letter {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    left: 12px;
+    top: 12px;
+    font-family: Roboto, serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 80px;
+    background: var(--main-bg-color);
+    border-radius: 40px;
+    align-items: center;
+    text-align: center;
+    color: var(--first-letter-color);
+}
+
+.logo {
+    height: 80px;
+    width: 80px;
+    margin: 12px 12px 12px 12px;
+}
+
+.git-card {
+    position: absolute;
+    font-family: Roboto, serif;
+    font-style: normal;
+    letter-spacing: 0;
+    text-align: left;
+    margin: 23px 0 0 104px;
+}
+
+.git-name-card {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19px;
+    display: inline-block;
+}
+
+.git-company-card {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    display: block;
+    color: var(--secondary-card-color);
+    margin: 4px 0 0 0;
+}
+
+.git-company-card:hover {
+    color: var(--company-hover-color);
+}
+
+.star {
+    height: 12.39px;
+    width: 12.96px;
+    margin-top: 0.22px;
+    vertical-align: -1px;
+}
+
+.git-views-card {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    display: inline-block;
+    color: var(--secondary-card-color);
+    margin: 4px 0 0 4.52px;
+}
+
+.git-date-card {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    display: inline-block;
+    color: var(--secondary-card-color);
+    margin: 4px 0 0 20px;
+}

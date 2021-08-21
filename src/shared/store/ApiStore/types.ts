@@ -1,6 +1,7 @@
 // Перечисление методов HTTP-запроса
 enum HTTPMethod {
-    // TODO: заполнить
+    GET,
+    POST
 }
 
 // Параметры запроса
@@ -19,7 +20,12 @@ export type RequestParams<ReqT> = {
 
 // Перечисление статусов ответа
 enum StatusHTTP {
-    // TODO: заполнить
+    OK = 200,
+    NO_CONTENT = 204,
+    BAD_REQUEST = 400,
+    FORBIDDEN = 403,
+    NOT_FOUND = 404,
+    BAD_GATEWAY = 502
 }
 
 // Ответ API
