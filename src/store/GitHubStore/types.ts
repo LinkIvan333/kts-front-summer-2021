@@ -10,7 +10,7 @@ export type GetOrganizationReposListParams = {
 }
 
 export type RepoItem = {
-    data: {};
+    name : any;
 }
 
 export type ApiResp<RepoItem> = {

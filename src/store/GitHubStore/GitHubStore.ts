@@ -11,10 +11,18 @@ export default class GitHubStore implements IGitHubStore {
             headers: {},
             method: 0
         })
-        const data = await result.data;
+        const date = await result.data;
+        let array = [];
+        for (let repo_info of date) {
+            array.push({
+                name: repo_info.name,
+                owner: repo_info.owner.login,
+                stars: repo_info.stargazers_count,
+                updated: repo_info.pushed_at})
+        }
         return {
             success: true,
-            data: data
+            data: array
         }
     }
 }
