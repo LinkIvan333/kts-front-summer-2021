@@ -43,10 +43,12 @@
 .git-name:focus {
     border: 1px solid var(--main-bg-color);
     color: var(--input-focus-color);
+    transition-duration: 1s;
 }
 
 .git-name:disabled {
     color: var(--input-disabled-color);
+    transition-duration: 1s;
 }
 
 .search-button {
@@ -56,6 +58,7 @@
     background: var(--main-bg-color);
     border-radius: 6px;
     border: none;
+    transition-duration: 1s;
 }
 
 .search-img{
@@ -64,11 +67,12 @@
 }
 
 .search-button:hover {
-    box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.2);
 }
 
 .search-button:disabled {
     background: var(--border-main-color);
+    transition-duration: 1s;
 }
 
 .box {
