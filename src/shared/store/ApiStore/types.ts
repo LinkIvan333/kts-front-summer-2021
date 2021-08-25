@@ -1,5 +1,5 @@
 // Перечисление методов HTTP-запроса
-enum HTTPMethod {
+export enum HTTPMethod {
     GET,
     POST
 }
@@ -19,7 +19,8 @@ export type RequestParams<ReqT> = {
 }
 
 // Перечисление статусов ответа
-enum StatusHTTP {
+export enum StatusHTTP {
+    UNEXPECTED_ERROR = 99,
     OK = 200,
     NO_CONTENT = 204,
     BAD_REQUEST = 400,

@@ -4,9 +4,19 @@
  * поменяйте в соответствии с выполняемым запросом.
  * Выберите любой запрос из публичного API GitHub.
  */
+export enum HTTPMethod {
+    GET,
+    POST
+}
 
 export type GetOrganizationReposListParams = {
     organizationName: string;
+}
+
+export type ApiResp<RepoItem> = {
+    success: boolean;
+    data: RepoItem;
+    status: number
 }
 
 export type RepoItem = {
@@ -16,14 +26,6 @@ export type RepoItem = {
     updated: string
 }
 
-export type ApiResp<RepoItem> = {
-    success: true;
-    data: RepoItem;
-}
-
 export interface IGitHubStore {
     getOrganizationReposList(params: GetOrganizationReposListParams): Promise<ApiResp<RepoItem[]>>;
-
-    // Необязательный пункт, т.к. требует авторизации. Понадобится в будущем
-   // postSomeData(params: PostSomeDataParams): Promise<ApiResp<PostSomeDataResp>>;
 }

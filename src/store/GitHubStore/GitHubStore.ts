@@ -1,28 +1,40 @@
-import ApiStore from '../../shared/store/ApiStore';
-import {IGitHubStore, GetOrganizationReposListParams, ApiResp, RepoItem} from "./types";
+import ApiStore from "../../shared/store/ApiStore";
+import {IGitHubStore, GetOrganizationReposListParams, RepoItem, HTTPMethod, ApiResp} from "./types";
 
 
 export default class GitHubStore implements IGitHubStore {
-    private readonly ApiStore = new ApiStore(`https://api.github.com/`);
+    private readonly apiStore = new ApiStore("https://api.github.com/");
+
     async getOrganizationReposList(params: GetOrganizationReposListParams): Promise<ApiResp<RepoItem[]>> {
-        const result = await this.ApiStore.request<{}>({
+        const result = await this.apiStore.request({
             data: {},
             endpoint: `orgs/${params.organizationName}/repos`,
             headers: {},
-            method: 0
-        })
-        const date = await result.data;
-        let array = [];
+            method: HTTPMethod.GET
+        });
+
+        const date = result.data;
+        if (!result.success) {
+            return {
+                success: false,
+                data: date,
+                status: result.status
+            }
+        }
+
+        const array = [];
         for (let repo_info of date) {
             array.push({
                 name: repo_info.name,
                 owner: repo_info.owner.login,
                 stars: repo_info.stargazers_count,
-                updated: repo_info.pushed_at})
+                updated: repo_info.pushed_at
+            })
         }
         return {
             success: true,
-            data: array
+            data: array,
+            status: result.status
         }
     }
 }
