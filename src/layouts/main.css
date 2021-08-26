@@ -17,10 +17,11 @@
     box-sizing: border-box;
     position: absolute;
     display: grid;
+    gap: 16px;
 }
 
 .search-line {
-    height: 70px;
+    height: 54px;
     display: flex;
     justify-content: space-between;
 }
@@ -82,7 +83,6 @@
     width: 357px;
     border-radius: 6px;
     box-sizing: border-box;
-    margin-bottom: 16px;
     padding: 12px 0 12px 12px;
     border: 1px solid var(--border-main-color);
     white-space: nowrap;
