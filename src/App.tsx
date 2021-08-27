@@ -1,13 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
-import Main from "./root/root"
+import "./root/root"
 
 function App() {
-  const getdata = () => {
-    const main1 = new Main();
-    main1.Main();
-  }
-  getdata();
+
   return (
     <div className="App">
       <header className="App-header">
