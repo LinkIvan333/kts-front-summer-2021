@@ -1,0 +1,14 @@
+.grid {
+    left: 20px;
+    top: 20px;
+    box-sizing: border-box;
+    position: absolute;
+    display: grid;
+    gap: 16px;
+}
+
+.search-line {
+    height: 54px;
+    display: flex;
+    justify-content: space-between;
+}
