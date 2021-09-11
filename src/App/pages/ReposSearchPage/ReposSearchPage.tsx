@@ -39,19 +39,28 @@ const ReposSearchPage = () => {
   },[localState]);
 
   const handleClick = React.useCallback(() => {
-    const updateLocalState = (newArgs: {value?: string, isLoading?: boolean, list?: RepoItem[]}) => {
-      setLocalState({...localState, ...newArgs});
-    }
-    updateLocalState({isLoading: true});
-    gitHubStore.getOrganizationReposList({
-      organizationName: localState.value
-    }).then(result => {
-      if (result.success) {
-        updateLocalState({isLoading: false, list: result.data });
-      } else {
-        updateLocalState({isLoading: false });
+    const updateLocalState = (newArgs: { value?: string, isLoading?: boolean, list?: RepoItem[] }) => {
+      setLocalState({ ...localState, ...newArgs });
+    };
+
+    const getRepos = async () => {
+      try {
+        updateLocalState({ isLoading: true });
+        await gitHubStore.getOrganizationReposList({
+          organizationName: localState.value
+        }).then(result => {
+          if (result.success) {
+            updateLocalState({ isLoading: false, list: result.data });
+          } else {
+            updateLocalState({ isLoading: false });
+          }
+        });
+      } catch (err) {
+
       }
-    });
+    };
+
+    getRepos();
   }, [localState]);
 
   return (

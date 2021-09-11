@@ -34,6 +34,7 @@ const RepoBranchesDrawer: React.FC<RepoBranchesDrawerProps> = ({ selectedRepo, o
 
       }
     };
+    getBranches();
   }, [selectedRepo]);
 
   if (selectedRepo != null) {
