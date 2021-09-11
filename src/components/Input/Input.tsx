@@ -1,6 +1,4 @@
 import "./Input.css";
-import "@styles/index.css";
-import "@styles/variables.css";
 import React from "react";
 
 type InputProps = {

@@ -1,7 +1,8 @@
-import MainPage from "./pages/MainPage";
+import ReposSearchPage from "@pages/ReposSearchPage";
+import "@styles/index.css"
 
 const App = () => {
-  return <MainPage />;
+  return <ReposSearchPage />;
 };
 
 export default App;

@@ -1,3 +1,5 @@
+@import "../../styles/variables.css";
+
 .first-company-letter {
     position: relative;
     width: 80px;

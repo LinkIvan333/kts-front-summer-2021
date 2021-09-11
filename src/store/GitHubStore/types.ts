@@ -34,7 +34,8 @@ export type RepoItem = {
 }
 
 export type BranchItem = {
-  name: string
+  name: string,
+  uuid: string
 }
 
 export interface IGitHubStore {

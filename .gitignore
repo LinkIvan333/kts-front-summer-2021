@@ -6,8 +6,6 @@
 .pnp.js
 /public
 /.idea
-.prettierrc
-config-overrides.js
 
 # testing
 /coverage

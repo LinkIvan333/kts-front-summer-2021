@@ -1,6 +1,4 @@
 import "./RepoBranchesDrawer.css";
-import "@styles/index.css";
-import "@styles/variables.css";
 import "@config/config";
 import React from "react";
 import { RepoItem, BranchItem } from "@GitHubStore/types";
@@ -39,7 +37,7 @@ const RepoBranchesDrawer: React.FC<RepoBranchesDrawerProps> = ({ selectedRepo, o
       >
         {list.map((element) => {
           return (
-            <p key={element.name} className="sp">• {element.name}</p>
+            <p key={element.uuid} className="sp">• {element.name}</p>
           );
         })}
 

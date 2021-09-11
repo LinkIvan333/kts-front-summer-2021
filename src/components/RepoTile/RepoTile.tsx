@@ -2,8 +2,6 @@ import StarIcon from "@components/StarIcon";
 import Avatar from "@components/Avatar";
 import { RepoItem } from "@GitHubStore/types";
 import "./RepoTile.css";
-import "@styles/index.css";
-import "@styles/variables.css";
 
 type RepoTileProps = {
   item: RepoItem;

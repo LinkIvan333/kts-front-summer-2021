@@ -8,6 +8,7 @@ import {
   ApiResp,
   BranchItem
 } from "./types";
+import { v4 as uuidv4 } from 'uuid';
 
 var dayjs = require("dayjs");
 
@@ -68,7 +69,8 @@ export default class GitHubStore implements IGitHubStore {
     const array = [];
     for (let repo_info of date) {
       array.push({
-        name: repo_info.name
+        name: repo_info.name,
+        uuid: uuidv4()
       });
     }
     return {
