@@ -5,8 +5,8 @@ import Button from "@components/Button";
 import SearchIcon from "@components/SearchIcon";
 import RepoBranchesDrawer from "@components/RepoBranchesDrawer";
 import React from "react";
-import GitHubStore from "@GitHubStore/GitHubStore";
-import { RepoItem } from "@GitHubStore/types";
+import GitHubStore from "@store/GitHubStore/GitHubStore";
+import { RepoItem } from "@store/GitHubStore/types";
 import { MAIN_CONST } from "@config/config";
 
 
@@ -17,42 +17,48 @@ const ReposSearchPage = () => {
   const [localState, setLocalState] = React.useState({
     value: "",
     isLoading: false,
-    list: [] as RepoItem[]
+    list: [] as RepoItem[],
   });
   const [selectedRepo, setSelectedRepo] = React.useState<null | RepoItem>(null);
   const [visible, setVisible] = React.useState(false);
 
-  const showDrawer = () => {
+  const showDrawer = React.useCallback(() => {
     setVisible(true);
-  };
+  }, []);
 
-  const onClose = () => {
+  const onClose = React.useCallback(() => {
     setVisible(false);
     setSelectedRepo(null);
-  };
+  }, []);
 
-  const handleKeyboard = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLocalState({ value: (e.target).value, isLoading: false, list: [] });
-  };
+  const handleKeyboard = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const updateLocalState = (newArgs: {value?: string, isLoading?: boolean, list?: RepoItem[]}) => {
+      setLocalState({...localState, ...newArgs});
+    }
+    updateLocalState({ value: (e.target).value});
+  },[localState]);
 
-  const handleClick = () => {
-    setLocalState({ value: localState.value, isLoading: true, list: localState.list });
+  const handleClick = React.useCallback(() => {
+    const updateLocalState = (newArgs: {value?: string, isLoading?: boolean, list?: RepoItem[]}) => {
+      setLocalState({...localState, ...newArgs});
+    }
+    updateLocalState({isLoading: true});
     gitHubStore.getOrganizationReposList({
       organizationName: localState.value
     }).then(result => {
       if (result.success) {
-        setLocalState({ value: localState.value, isLoading: false, list: result.data });
+        updateLocalState({isLoading: false, list: result.data });
       } else {
-        setLocalState({ value: localState.value, isLoading: false, list: localState.list });
+        updateLocalState({isLoading: false });
       }
     });
-  };
+  }, [localState]);
 
   return (
     <div className="grid">
       <div className="search-line">
         <Input placeholder={MAIN_CONST.PLACEHOLDER} onChange={handleKeyboard} value={localState.value} />
-        <Button onClick={handleClick} disabled={localState.isLoading}><SearchIcon /></Button>
+        <Button onClick={handleClick} disabled={localState.isLoading} type={"submit"}><SearchIcon /></Button>
       </div>
       {localState.list.map((element) => {
         const handleCardClick = () => {

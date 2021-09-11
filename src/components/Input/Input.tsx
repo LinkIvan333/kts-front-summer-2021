@@ -3,15 +3,16 @@ import React from "react";
 
 type InputProps = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  placeholder: string;
+  placeholder?: string;
   value: string;
+  type?: string;
 }
 
-const Input: React.FC<InputProps> = ({ value, placeholder, onChange }) => {
+const Input: React.FC<InputProps> = ({ value, placeholder, onChange, type }) => {
 
   return (
     <input
-      type="text"
+      type={type}
       className="git-name"
       placeholder={placeholder}
       onChange={onChange}

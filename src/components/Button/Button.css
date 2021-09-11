@@ -16,5 +16,4 @@
 
 .search-button:disabled {
     background: var(--border-main-color);
-    transition-duration: 1s;
 }

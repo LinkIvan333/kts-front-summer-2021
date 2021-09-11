@@ -1,8 +1,6 @@
 .grid {
-    left: 20px;
-    top: 20px;
+    margin: var(--grid-left-top-margin) 0 0 var(--grid-left-top-margin);
     box-sizing: border-box;
-    position: absolute;
     display: grid;
     gap: 16px;
 }

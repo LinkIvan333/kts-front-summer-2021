@@ -24,18 +24,12 @@ export default class ApiStore implements IApiStore {
           body: JSON.stringify(params.data)
         }));
 
-      if (response.ok) {
-        return {
-          success: true,
-          data: await response.json(),
-          status: response.status
-        };
-      }
       return {
-        success: false,
+        success: response.ok,
         data: await response.json(),
         status: response.status
       };
+
     } catch (e) {
       return {
         success: false,

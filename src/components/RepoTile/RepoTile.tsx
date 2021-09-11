@@ -1,6 +1,6 @@
 import StarIcon from "@components/StarIcon";
 import Avatar from "@components/Avatar";
-import { RepoItem } from "@GitHubStore/types";
+import { RepoItem } from "@store/GitHubStore/types";
 import "./RepoTile.css";
 
 type RepoTileProps = {
@@ -11,7 +11,7 @@ type RepoTileProps = {
 const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
   return (
     <div className="box" onClick={onClick}>
-      <Avatar src={item.avatar_url} letter={item.name.charAt(0).toUpperCase()} />
+      <Avatar src={item.avatarUrl} letter={item.name.charAt(0).toUpperCase()} />
       <div className="git-card">
         <span className="git-name-card">{item.name}</span>
         <span className="git-company-card">{item.owner}</span>

@@ -4,24 +4,17 @@ import React from "react";
 type ButtonProps = {
   children: React.ReactNode;
   onClick: (e: React.MouseEvent) => void;
-  disabled: boolean;
+  disabled?: boolean;
+  type?: "reset" | "button" | "submit";
 }
 
-const Button: React.FC<ButtonProps> = ({ children, onClick, disabled }) => {
-  if (!disabled) {
-    return (
-      <button
-        type="submit"
-        className="search-button"
-        onClick={onClick}
-      >{children}</button>
-    );
-  }
+const Button: React.FC<ButtonProps> = ({ children, onClick, disabled, type }) => {
   return (
     <button
-      type="submit"
+      type={type}
       className="search-button"
-      disabled={true}
+      onClick={onClick}
+      disabled={disabled}
     >{children}</button>
   );
 };

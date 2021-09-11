@@ -6,8 +6,9 @@
       "@config/*": ["src/config/*"],
       "@styles/*": ["src/styles/*"],
       "@utils/*": ["src/utils/*"],
-      "@GitHubStore/*": ["src/store/GitHubStore/*"],
-      "@pages/*": ["src/App/pages/*"]
+      "@store/*": ["src/store/*"],
+      "@pages/*": ["src/App/pages/*"],
+      "@shared/*": ["src/shared/store/*"]
     }
   }
 }

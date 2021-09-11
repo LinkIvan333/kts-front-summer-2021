@@ -26,7 +26,7 @@ export type ApiResp<RepoItem> = {
 
 export type RepoItem = {
   id: number,
-  avatar_url: string,
+  avatarUrl: string,
   name: string,
   owner: string,
   stars: number,

@@ -8,9 +8,9 @@ type AvatarProps = {
 }
 
 const Avatar: React.FC<AvatarProps> = ({ src, letter, alt }) => {
-  if (src == null) {
+  if (!src) {
     return (
-      <span className="first-company-letter">{letter}</span>
+      <span className="first-company-letter company-avatar">{letter}</span>
     );
   }
   return (

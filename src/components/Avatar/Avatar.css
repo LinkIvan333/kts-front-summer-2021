@@ -1,9 +1,6 @@
 @import "../../styles/variables.css";
 
 .first-company-letter {
-    position: relative;
-    width: 80px;
-    height: 80px;
     font-style: normal;
     font-weight: bold;
     font-size: 40px;

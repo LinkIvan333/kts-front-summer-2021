@@ -1,4 +1,4 @@
-import ApiStore from "../../shared/store/ApiStore";
+import ApiStore from "@shared/ApiStore";
 import {
   IGitHubStore,
   GetOrganizationReposListParams,
@@ -9,8 +9,7 @@ import {
   BranchItem
 } from "./types";
 import { v4 as uuidv4 } from 'uuid';
-
-var dayjs = require("dayjs");
+import dayjs from 'dayjs';
 
 export default class GitHubStore implements IGitHubStore {
   private readonly apiStore = new ApiStore("https://api.github.com/");
@@ -23,29 +22,27 @@ export default class GitHubStore implements IGitHubStore {
       method: HTTPMethod.GET
     });
 
-    const date = result.data;
+    const data = result.data;
     if (!result.success) {
       return {
         success: false,
-        data: date,
+        data: data,
         status: result.status
       };
     }
 
-    const array = [];
-    for (let repo_info of date) {
-      array.push({
-        id: repo_info.id,
-        avatar_url: repo_info.owner.avatar_url,
-        name: repo_info.name,
-        owner: repo_info.owner.login,
-        stars: repo_info.stargazers_count,
-        updated: `Updated ${dayjs(repo_info.pushed_at).format("DD MMM")}`
-      });
-    }
     return {
       success: true,
-      data: array,
+      data: data.map((repoInfo: any) => {
+        return {
+          id: repoInfo.id,
+          avatarUrl: repoInfo.owner.avatar_url,
+          name: repoInfo.name,
+          owner: repoInfo.owner.login,
+          stars: repoInfo.stargazers_count,
+          updated: `Updated ${dayjs(repoInfo.pushed_at).format("DD MMM")}`
+        }
+      }),
       status: result.status
     };
   }
@@ -58,24 +55,23 @@ export default class GitHubStore implements IGitHubStore {
       method: HTTPMethod.GET
     });
 
-    const date = result.data;
+    const data = result.data;
     if (!result.success) {
       return {
         success: false,
-        data: date,
+        data: data,
         status: result.status
       };
     }
-    const array = [];
-    for (let repo_info of date) {
-      array.push({
-        name: repo_info.name,
-        uuid: uuidv4()
-      });
-    }
+
     return {
       success: true,
-      data: array,
+      data: data.map((repoInfo: BranchItem) => {
+        return {
+          name: repoInfo.name,
+          uuid: uuidv4()
+        }
+      }),
       status: result.status
     };
   }

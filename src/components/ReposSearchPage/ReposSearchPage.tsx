@@ -5,8 +5,8 @@ import Button from "@components/Button";
 import SearchIcon from "@components/SearchIcon";
 import RepoBranchesDrawer from "@components/RepoBranchesDrawer";
 import React from "react";
-import GitHubStore from "@GitHubStore/GitHubStore";
-import { RepoItem } from "@GitHubStore/types";
+import GitHubStore from "@store/GitHubStore/GitHubStore";
+import { RepoItem } from "@store/GitHubStore/types";
 import { MAIN_CONST } from "@config/config";
 
 
