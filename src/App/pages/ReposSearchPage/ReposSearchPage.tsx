@@ -59,6 +59,7 @@ const ReposSearchPage = () => {
 
       }
     };
+
     getRepos();
   }, [localState]);
 
