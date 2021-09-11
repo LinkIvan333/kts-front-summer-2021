@@ -17,7 +17,7 @@ const ReposSearchPage = () => {
   const [localState, setLocalState] = React.useState({
     value: "",
     isLoading: false,
-    list: [] as RepoItem[],
+    list: [] as RepoItem[]
   });
   const [selectedRepo, setSelectedRepo] = React.useState<null | RepoItem>(null);
   const [visible, setVisible] = React.useState(false);
@@ -32,26 +32,34 @@ const ReposSearchPage = () => {
   }, []);
 
   const handleKeyboard = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const updateLocalState = (newArgs: {value?: string, isLoading?: boolean, list?: RepoItem[]}) => {
-      setLocalState({...localState, ...newArgs});
-    }
-    updateLocalState({ value: (e.target).value});
-  },[localState]);
+    const updateLocalState = (newArgs: { value?: string, isLoading?: boolean, list?: RepoItem[] }) => {
+      setLocalState({ ...localState, ...newArgs });
+    };
+    updateLocalState({ value: (e.target).value });
+  }, [localState]);
 
   const handleClick = React.useCallback(() => {
-    const updateLocalState = (newArgs: {value?: string, isLoading?: boolean, list?: RepoItem[]}) => {
-      setLocalState({...localState, ...newArgs});
-    }
-    updateLocalState({isLoading: true});
-    gitHubStore.getOrganizationReposList({
-      organizationName: localState.value
-    }).then(result => {
-      if (result.success) {
-        updateLocalState({isLoading: false, list: result.data });
-      } else {
-        updateLocalState({isLoading: false });
+    const updateLocalState = (newArgs: { value?: string, isLoading?: boolean, list?: RepoItem[] }) => {
+      setLocalState({ ...localState, ...newArgs });
+    };
+
+    const getRepos = async () => {
+      try {
+        updateLocalState({ isLoading: true });
+        await gitHubStore.getOrganizationReposList({
+          organizationName: localState.value
+        }).then(result => {
+          if (result.success) {
+            updateLocalState({ isLoading: false, list: result.data });
+          } else {
+            updateLocalState({ isLoading: false });
+          }
+        });
+      } catch (err) {
+
       }
-    });
+    };
+    getRepos();
   }, [localState]);
 
   return (
