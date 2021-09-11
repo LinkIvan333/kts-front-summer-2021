@@ -18,17 +18,22 @@ const RepoBranchesDrawer: React.FC<RepoBranchesDrawerProps> = ({ selectedRepo, o
   const [list, setList] = React.useState<[] | BranchItem[]>([]);
 
   React.useEffect(() => {
-    if (selectedRepo != null) {
-      gitHubStore.getOrganizationRepoBranches({
-        organizationName: selectedRepo.owner,
-        repoName: selectedRepo.name
-      }).then(result => {
-        if (result.success) {
-          setList(result.data);
+    const getBranches = async () => {
+      try {
+        if (selectedRepo != null) {
+          await gitHubStore.getOrganizationRepoBranches({
+            organizationName: selectedRepo.owner,
+            repoName: selectedRepo.name
+          }).then(result => {
+            if (result.success) {
+              setList(result.data);
+            }
+          });
         }
-      });
-    }
+      } catch (err) {
 
+      }
+    };
   }, [selectedRepo]);
 
   if (selectedRepo != null) {
