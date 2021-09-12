@@ -1,4 +1,4 @@
-import "./Avatar.css";
+import AvatarStyle from "./Avatar.module.scss";
 import React from "react";
 
 type AvatarProps = {
@@ -10,11 +10,11 @@ type AvatarProps = {
 const Avatar: React.FC<AvatarProps> = ({ src, letter, alt }) => {
   if (!src) {
     return (
-      <span className="first-company-letter company-avatar">{letter}</span>
+      <span className={`${AvatarStyle.companyAvatar} ${AvatarStyle.firstCompanyLetter}`}>{letter}</span>
     );
   }
   return (
-    <img className="company-avatar" src={src} alt={alt} />
+    <img className={AvatarStyle.companyAvatar} src={src} alt={alt} />
   );
 };
 

@@ -1,4 +1,4 @@
-import "./Button.css";
+import ButtonStyle from "./Button.module.scss";
 import React from "react";
 
 type ButtonProps = {
@@ -12,7 +12,7 @@ const Button: React.FC<ButtonProps> = ({ children, onClick, disabled, type }) =>
   return (
     <button
       type={type}
-      className="search-button"
+      className={ButtonStyle.searchButton}
       onClick={onClick}
       disabled={disabled}
     >{children}</button>

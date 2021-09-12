@@ -1,0 +1,10 @@
+@import "../../styles/variables.scss";
+
+.sp {
+    font-size: 14px;
+    background-color: $main-bg-color;
+    padding: 5px;
+    border-radius: 5px 5px 5px;
+    border: 1px solid $border-main-color;
+    display: block;
+}

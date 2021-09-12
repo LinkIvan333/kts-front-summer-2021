@@ -1,4 +1,4 @@
-import "./ReposSearchPage.css";
+import ReposSearchPageStyle from "./ReposSearchPage.module.scss";
 import RepoTile from "@components/RepoTile";
 import Input from "@components/Input";
 import Button from "@components/Button";
@@ -18,6 +18,7 @@ const ReposContext = React.createContext({
   }
 });
 const Provider = ReposContext.Provider;
+export const useReposContext = () => React.useContext(ReposContext);
 
 const ReposSearchPage = () => {
 
@@ -70,8 +71,8 @@ const ReposSearchPage = () => {
 
   return (
     <Provider value={{list, isLoading, load}}>
-      <div className="grid">
-        <div className="search-line">
+      <div className={ReposSearchPageStyle.grid}>
+        <div className={ReposSearchPageStyle.searchLine}>
           <Input placeholder={MAIN_CONST.PLACEHOLDER} onChange={handleKeyboard} value={value} />
           <Button onClick={handleClick} disabled={isLoading} type={"submit"}><SearchIcon /></Button>
         </div>
