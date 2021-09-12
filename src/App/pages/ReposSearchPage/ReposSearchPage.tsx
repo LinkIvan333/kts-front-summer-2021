@@ -13,13 +13,17 @@ import { Link } from "react-router-dom";
 
 const gitHubStore = new GitHubStore();
 
+const ReposContext = React.createContext({
+  list: [] as RepoItem[], isLoading: false, load: (e: boolean) => {
+  }
+});
+const Provider = ReposContext.Provider;
+
 const ReposSearchPage = () => {
 
-  const [localState, setLocalState] = React.useState({
-    value: "",
-    isLoading: false,
-    list: [] as RepoItem[],
-  });
+  const [value, setValue] = React.useState("");
+  const [isLoading, load] = React.useState(false);
+  const [list, setList] = React.useState<RepoItem[]>([]);
   const [selectedRepo, setSelectedRepo] = React.useState<null | RepoItem>(null);
   const [visible, setVisible] = React.useState(false);
 
@@ -33,27 +37,21 @@ const ReposSearchPage = () => {
   }, []);
 
   const handleKeyboard = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const updateLocalState = (newArgs: {value?: string, isLoading?: boolean, list?: RepoItem[]}) => {
-      setLocalState({...localState, ...newArgs});
-    }
-    updateLocalState({ value: (e.target).value});
-  },[localState]);
+    setValue((e.target).value);
+  }, []);
 
   const handleClick = React.useCallback(() => {
-    const updateLocalState = (newArgs: { value?: string, isLoading?: boolean, list?: RepoItem[] }) => {
-      setLocalState({ ...localState, ...newArgs });
-    };
-
     const getRepos = async () => {
       try {
-        updateLocalState({ isLoading: true });
+        load(true);
         await gitHubStore.getOrganizationReposList({
-          organizationName: localState.value
+          organizationName: value
         }).then(result => {
           if (result.success) {
-            updateLocalState({ isLoading: false, list: result.data });
+            load(false);
+            setList(result.data)
           } else {
-            updateLocalState({ isLoading: false });
+            load(false);
           }
         });
       } catch (err) {
@@ -62,27 +60,29 @@ const ReposSearchPage = () => {
     };
 
     getRepos();
-  }, [localState]);
+  }, [value]);
 
   return (
-    <div className="grid">
-      <div className="search-line">
-        <Input placeholder={MAIN_CONST.PLACEHOLDER} onChange={handleKeyboard} value={localState.value} />
-        <Button onClick={handleClick} disabled={localState.isLoading} type={"submit"}><SearchIcon /></Button>
+    <Provider value={{list, isLoading, load}}>
+      <div className="grid">
+        <div className="search-line">
+          <Input placeholder={MAIN_CONST.PLACEHOLDER} onChange={handleKeyboard} value={value} />
+          <Button onClick={handleClick} disabled={isLoading} type={"submit"}><SearchIcon /></Button>
+        </div>
+        {list.map((element) => {
+          const handleCardClick = () => {
+            setSelectedRepo(element);
+            showDrawer();
+          };
+          return (
+            <Link to={`/repos/${element.id}`} key={element.id}>
+              <RepoTile item={element} onClick={handleCardClick} />
+            </Link>
+          );
+        })}
+        <RepoBranchesDrawer selectedRepo={selectedRepo} onClose={onClose} visible={visible} />
       </div>
-      {localState.list.map((element) => {
-        const handleCardClick = () => {
-          setSelectedRepo(element);
-          showDrawer();
-        };
-        return (
-          <Link to={`/repos/${element.id}`} key={element.id} >
-            <RepoTile item={element} onClick={handleCardClick} />
-          </Link>
-        );
-      })}
-      <RepoBranchesDrawer selectedRepo={selectedRepo} onClose={onClose} visible={visible} />
-    </div>
+    </Provider>
   );
 };
 

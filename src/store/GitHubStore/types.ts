@@ -15,6 +15,8 @@ export type GetOrganizationReposListParams = {
 
 export type GetOrganizationRepoBranchesParams = {
   id: string;
+  // organizationName: string;
+  // repoName: string;
 }
 
 export type ApiResp<RepoItem> = {

@@ -75,4 +75,31 @@ export default class GitHubStore implements IGitHubStore {
       status: result.status
     };
   }
+  //   const result = await this.apiStore.request({
+  //     data: {},
+  //     endpoint: `repos/${params.organizationName}/${params.repoName}/branches`,
+  //     headers: {},
+  //     method: HTTPMethod.GET
+  //   });
+  //
+  //   const data = result.data;
+  //   if (!result.success) {
+  //     return {
+  //       success: false,
+  //       data: data,
+  //       status: result.status
+  //     };
+  //   }
+  //
+  //   return {
+  //     success: true,
+  //     data: data.map((repoInfo: BranchItem) => {
+  //       return {
+  //         name: repoInfo.name,
+  //         uuid: uuidv4()
+  //       }
+  //     }),
+  //     status: result.status
+  //   };
+  // }
 }
