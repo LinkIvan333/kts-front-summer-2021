@@ -1,1 +1,1 @@
-export {default} from './ApiStore';
+export { default } from "./ApiStore";

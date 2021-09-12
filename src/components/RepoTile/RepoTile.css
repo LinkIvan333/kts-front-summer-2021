@@ -1,0 +1,66 @@
+@import "../../styles/variables.css";
+
+.box {
+    display: flex;
+    align-items: center;
+    height: 104px;
+    width: 357px;
+    border-radius: 6px;
+    box-sizing: border-box;
+    padding: 12px 0 12px 12px;
+    border: 1px solid var(--border-main-color);
+    white-space: nowrap;
+}
+
+.box:hover {
+    box-shadow: 0 2px 6px 0 var(--card-hover-color);
+}
+
+.git-card {
+    font-style: normal;
+    letter-spacing: 0;
+    text-align: left;
+    margin: 9px 0 0 0;
+    padding-left: 12px;
+}
+
+.git-name-card {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19px;
+    display: inline-block;
+    max-width: 241px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.git-company-card {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    display: block;
+    color: var(--secondary-card-color);
+    margin: 4px 0 0 0;
+}
+
+.git-company-card:hover {
+    color: var(--company-hover-color);
+}
+
+.git-views-card {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    display: inline-block;
+    color: var(--secondary-card-color);
+    margin: 4px 0 0 4.52px;
+}
+
+.git-date-card {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    display: inline-block;
+    color: var(--secondary-card-color);
+    margin: 4px 0 0 20px;
+}

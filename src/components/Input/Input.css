@@ -1,0 +1,27 @@
+@import "../../styles/variables.css";
+
+.git-name {
+    display: block;
+    height: 50px;
+    width: 295px;
+    border: 1px solid var(--border-main-color);
+    box-sizing: border-box;
+    border-radius: 6px;
+    padding-left: 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0;
+    text-align: left;
+}
+
+.git-name:focus {
+    border: 1px solid var(--main-bg-color);
+    color: var(--input-focus-color);
+    transition-duration: 1s;
+}
+
+.git-name:disabled {
+    color: var(--input-disabled-color);
+    transition-duration: 1s;
+}

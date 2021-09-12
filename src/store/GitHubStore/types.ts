@@ -5,27 +5,39 @@
  * Выберите любой запрос из публичного API GitHub.
  */
 export enum HTTPMethod {
-    GET,
-    POST
+  GET,
+  POST
 }
 
 export type GetOrganizationReposListParams = {
-    organizationName: string;
+  organizationName: string;
+}
+
+export type GetOrganizationRepoBranchesParams = {
+  organizationName: string;
+  repoName: string;
 }
 
 export type ApiResp<RepoItem> = {
-    success: boolean;
-    data: RepoItem;
-    status: number
+  success: boolean;
+  data: RepoItem;
+  status: number
 }
 
 export type RepoItem = {
-    name: string,
-    owner: string,
-    stars: number,
-    updated: string
+  id: number,
+  avatarUrl: string,
+  name: string,
+  owner: string,
+  stars: number,
+  updated: string
+}
+
+export type BranchItem = {
+  name: string,
+  uuid: string
 }
 
 export interface IGitHubStore {
-    getOrganizationReposList(params: GetOrganizationReposListParams): Promise<ApiResp<RepoItem[]>>;
+  getOrganizationReposList(params: GetOrganizationReposListParams): Promise<ApiResp<RepoItem[]>>;
 }

@@ -1,0 +1,13 @@
+.grid {
+    margin: var(--grid-left-top-margin) 0 0 var(--grid-left-top-margin);
+    box-sizing: border-box;
+    display: grid;
+    gap: 16px;
+}
+
+.search-line {
+    height: 54px;
+    width: 357px;
+    display: flex;
+    justify-content: space-between;
+}
