@@ -61,11 +61,13 @@ const ReposSearchPage = () => {
 
     getRepos();
   }, [value]);
+
   const RepoBranchesDrawerShower = () => {
     return (
       <RepoBranchesDrawer selectedRepo={selectedRepo} onClose={onClose} visible={visible}/>
     )
   }
+
   return (
     <Provider value={{list, isLoading, load}}>
       <div className="grid">
