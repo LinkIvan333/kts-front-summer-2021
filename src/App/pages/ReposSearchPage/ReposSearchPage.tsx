@@ -8,7 +8,7 @@ import React from "react";
 import GitHubStore from "@store/GitHubStore/GitHubStore";
 import { RepoItem } from "@store/GitHubStore/types";
 import { MAIN_CONST } from "@config/config";
-import { Link } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 
 
 const gitHubStore = new GitHubStore();
@@ -61,7 +61,11 @@ const ReposSearchPage = () => {
 
     getRepos();
   }, [value]);
-
+  const RepoBranchesDrawerShower = () => {
+    return (
+      <RepoBranchesDrawer selectedRepo={selectedRepo} onClose={onClose} visible={visible}/>
+    )
+  }
   return (
     <Provider value={{list, isLoading, load}}>
       <div className="grid">
@@ -80,7 +84,7 @@ const ReposSearchPage = () => {
             </Link>
           );
         })}
-        <RepoBranchesDrawer selectedRepo={selectedRepo} onClose={onClose} visible={visible} />
+        <Route path="/repos/:id" component={RepoBranchesDrawerShower} />
       </div>
     </Provider>
   );

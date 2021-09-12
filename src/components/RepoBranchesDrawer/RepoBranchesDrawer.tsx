@@ -19,28 +19,27 @@ const RepoBranchesDrawer: React.FC<RepoBranchesDrawerProps> = ({ selectedRepo, o
   const [list, setList] = React.useState<[] | BranchItem[]>([]);
   const { id } = useParams<{id: string}>();
 
-  const getBranches = async (id: string) => {
-    try {
-      if (id !== undefined) {
-        await gitHubStore.getOrganizationRepoBranches({
-          id: id,
-        }).then(result => {
-          if (result.success) {
-            setList(result.data);
-          }
-        });
-      }
-    } catch (err) {
-
-    }
-  };
-
   React.useEffect(() => {
-    getBranches(id);
-    console.log(id, list.length)
+    const getBranches = async () => {
+      try {
+        if (id !== undefined) {
+          await gitHubStore.getOrganizationRepoBranches({
+            id: id
+          }).then(result => {
+            if (result.success) {
+              setList(result.data);
+            }
+          });
+        }
+      } catch (err) {
+
+      }
+    };
+    getBranches();
+    return () => {setList([])}
+
   }, [id]);
 
-  console.log(list.length);
   if (selectedRepo != null) {
     return (
       <Drawer
@@ -51,12 +50,11 @@ const RepoBranchesDrawer: React.FC<RepoBranchesDrawerProps> = ({ selectedRepo, o
         visible={visible}
       >
         {
-        //   list.map((element) => {
-        //   return (
-        //     <p key={element.uuid} className="sp">• {element.name}</p>
-        //   );
-        // })
-          <p>{list.length}</p>
+          list.map((element) => {
+          return (
+            <p key={element.uuid} className="sp">• {element.name}</p>
+          );
+        })
         }
       </Drawer>);
   }
