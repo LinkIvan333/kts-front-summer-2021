@@ -3,6 +3,7 @@
     box-sizing: border-box;
     display: grid;
     gap: 16px;
+    width: 357px;
 }
 
 .search-line {

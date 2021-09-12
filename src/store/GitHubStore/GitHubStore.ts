@@ -50,7 +50,7 @@ export default class GitHubStore implements IGitHubStore {
   async getOrganizationRepoBranches(params: GetOrganizationRepoBranchesParams): Promise<ApiResp<BranchItem[]>> {
     const result = await this.apiStore.request({
       data: {},
-      endpoint: `repos/${params.organizationName}/${params.repoName}/branches`,
+      endpoint: `repositories/${params.id}/branches`,
       headers: {},
       method: HTTPMethod.GET
     });

@@ -5,6 +5,7 @@ import { RepoItem, BranchItem } from "@store/GitHubStore/types";
 import GitHubStore from "@store/GitHubStore/GitHubStore";
 import { Drawer } from "antd";
 import { MAIN_CONST } from "@config/config";
+import { useParams } from "react-router-dom"
 
 const gitHubStore = new GitHubStore();
 
@@ -15,6 +16,49 @@ type RepoBranchesDrawerProps = {
 }
 
 const RepoBranchesDrawer: React.FC<RepoBranchesDrawerProps> = ({ selectedRepo, onClose, visible }) => {
+  // const [list, setList] = React.useState<[] | BranchItem[]>([]);
+  // const { id } = useParams<{id: string}>();
+  //
+  // React.useEffect(() => {
+  //   const getBranches = async () => {
+  //     try {
+  //       if (id !== undefined) {
+  //         await gitHubStore.getOrganizationRepoBranches({
+  //           id: id,
+  //         }).then(result => {
+  //           if (result.success) {
+  //             setList(result.data);
+  //           }
+  //         });
+  //       }
+  //     } catch (err) {
+  //
+  //     }
+  //   };
+  //   getBranches();
+  //   console.log("effect");
+  //   return () => {}
+  // }, [id]);
+  // console.log("1");
+  // if (selectedRepo != null) {
+  // //if (id === undefined) {
+  //   return (
+  //     <Drawer
+  //       title={`${MAIN_CONST.SIDE_NAME_REPO} `}
+  //       placement="right"
+  //       closable={false}
+  //       onClose={onClose}
+  //       visible={visible}
+  //     >
+  //       {list.map((element) => {
+  //         return (
+  //           <p key={element.uuid} className="sp">• {element.name}</p>
+  //         );
+  //       })}
+  //
+  //     </Drawer>);
+  // }
+  // return null;
   const [list, setList] = React.useState<[] | BranchItem[]>([]);
 
   React.useEffect(() => {

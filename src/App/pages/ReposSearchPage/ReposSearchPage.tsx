@@ -8,6 +8,7 @@ import React from "react";
 import GitHubStore from "@store/GitHubStore/GitHubStore";
 import { RepoItem } from "@store/GitHubStore/types";
 import { MAIN_CONST } from "@config/config";
+import { Link } from "react-router-dom";
 
 
 const gitHubStore = new GitHubStore();
@@ -75,7 +76,9 @@ const ReposSearchPage = () => {
           showDrawer();
         };
         return (
-          <RepoTile key={element.id} item={element} onClick={handleCardClick} />
+          <Link to={`/repos/${element.id}`} key={element.id} >
+            <RepoTile item={element} onClick={handleCardClick} />
+          </Link>
         );
       })}
       <RepoBranchesDrawer selectedRepo={selectedRepo} onClose={onClose} visible={visible} />
