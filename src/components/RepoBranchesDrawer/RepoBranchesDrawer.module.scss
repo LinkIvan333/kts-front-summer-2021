@@ -1,7 +1,7 @@
-@import "../../styles/variables.scss";
+@import "src/styles/variables.scss";
 
 .sp {
-    font-size: 14px;
+    font-size: $branches-drawer-font-size;
     background-color: $main-bg-color;
     padding: 5px;
     border-radius: 5px 5px 5px;

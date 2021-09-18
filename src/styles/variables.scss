@@ -1,10 +1,25 @@
-$main-bg-color: #FF5555;
-$border-main-color: #D9D9D9;
-$input-focus-color: #000000;
-$input-disabled-color: #7E7E7E;
-$card-default-color: #000000;
-$secondary-card-color: #7E7E7E;
-$card-hover-color: #B6B6B640;
-$first-letter-color: #FFFFFF;
-$company-hover-color: #208FBF;
-$grid-left-top-margin: 20px;
+$main-bg-color: var(--main-bg-color);
+$border-main-color: var(--border-main-color);
+$input-focus-color: var(--input-focus-color);
+$input-disabled-color: var(--input-disabled-color);
+$card-default-color: var(--card-default-color);
+$secondary-card-color: var(--secondary-card-color);
+$card-hover-color: var(--card-hover-color);
+$first-letter-color: var(--first-letter-color);
+$company-hover-color: var(--company-hover-color);
+$grid-left-top-margin: var(--grid-left-top-margin);
+$branches-drawer-font-size: var(--branches-drawer-font-size);
+
+* {
+  --main-bg-color: #FF5555;
+  --border-main-color: #D9D9D9;
+  --input-focus-color: #000000;
+  --input-disabled-color: #7E7E7E;
+  --card-default-color: #000000;
+  --secondary-card-color: #7E7E7E;
+  --card-hover-color: #B6B6B640;
+  --first-letter-color: #FFFFFF;
+  --company-hover-color: #208FBF;
+  --grid-left-top-margin: 20px;
+  --branches-drawer-font-size: 14px;
+}

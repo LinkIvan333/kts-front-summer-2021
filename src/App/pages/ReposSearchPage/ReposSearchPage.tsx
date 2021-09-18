@@ -1,14 +1,14 @@
 import ReposSearchPageStyle from "./ReposSearchPage.module.scss";
-import RepoTile from "@components/RepoTile";
 import Input from "@components/Input";
 import Button from "@components/Button";
 import SearchIcon from "@components/SearchIcon";
+import RepoTileDrawer from "@pages/ReposSearchPage/components/RepoTileDrawer"
 import RepoBranchesDrawer from "@components/RepoBranchesDrawer";
 import React from "react";
 import GitHubStore from "@store/GitHubStore/GitHubStore";
 import { RepoItem } from "@store/GitHubStore/types";
-import { MAIN_CONST } from "@config/config";
-import { Link, Route } from "react-router-dom";
+import { MAIN_CONST, ROUTES } from "@config/config";
+import { Route } from "react-router-dom";
 
 
 const gitHubStore = new GitHubStore();
@@ -17,6 +17,7 @@ const ReposContext = React.createContext({
   list: [] as RepoItem[], isLoading: false, load: (e: boolean) => {
   }
 });
+
 const Provider = ReposContext.Provider;
 export const useReposContext = () => React.useContext(ReposContext);
 
@@ -69,6 +70,11 @@ const ReposSearchPage = () => {
     )
   }
 
+  const handleCardClick = (element: RepoItem) => {
+    setSelectedRepo(element);
+    showDrawer();
+  };
+
   return (
     <Provider value={{list, isLoading, load}}>
       <div className={ReposSearchPageStyle.grid}>
@@ -76,18 +82,8 @@ const ReposSearchPage = () => {
           <Input placeholder={MAIN_CONST.PLACEHOLDER} onChange={handleKeyboard} value={value} />
           <Button onClick={handleClick} disabled={isLoading} type={"submit"}><SearchIcon /></Button>
         </div>
-        {list.map((element) => {
-          const handleCardClick = () => {
-            setSelectedRepo(element);
-            showDrawer();
-          };
-          return (
-            <Link to={`/repos/${element.id}`} key={element.id}>
-              <RepoTile item={element} onClick={handleCardClick} />
-            </Link>
-          );
-        })}
-        <Route path="/repos/:id" component={RepoBranchesDrawerShower} />
+        <RepoTileDrawer onClick={handleCardClick} />
+        <Route path={ROUTES.repos.create(":id")} component={RepoBranchesDrawerShower} />
       </div>
     </Provider>
   );

@@ -5,10 +5,14 @@ import RepoTileStyle from "./RepoTile.module.scss";
 
 type RepoTileProps = {
   item: RepoItem;
-  onClick: (e: React.MouseEvent) => void;
+  _onClick: (it: RepoItem) => void;
 }
 
-const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
+const RepoTile: React.FC<RepoTileProps> = ({ item, _onClick }) => {
+  const onClick = (e: React.MouseEvent) => {
+    _onClick(item);
+  }
+
   return (
     <div className={RepoTileStyle.box} onClick={onClick}>
       <Avatar src={item.avatarUrl} letter={item.name.charAt(0).toUpperCase()} />
