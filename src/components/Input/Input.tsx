@@ -1,4 +1,4 @@
-import "./Input.css";
+import InputStyle from "./Input.module.scss";
 import React from "react";
 
 type InputProps = {
@@ -13,7 +13,7 @@ const Input: React.FC<InputProps> = ({ value, placeholder, onChange, type }) => 
   return (
     <input
       type={type}
-      className="git-name"
+      className={InputStyle.gitName}
       placeholder={placeholder}
       onChange={onChange}
       value={value} />
