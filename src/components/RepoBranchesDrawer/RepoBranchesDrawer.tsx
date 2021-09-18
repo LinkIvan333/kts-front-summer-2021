@@ -35,11 +35,11 @@ const RepoBranchesDrawer: React.FC<RepoBranchesDrawerProps> = ({ selectedRepo, o
 
       }
     };
-
+    
     setList([]);
     getBranches();
   }, [id]);
-
+  
   if (selectedRepo != null) {
     return (
       <Drawer
