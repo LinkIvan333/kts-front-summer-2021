@@ -1,11 +1,11 @@
 import StarIcon from "@components/StarIcon";
 import Avatar from "@components/Avatar";
-import { RepoItem } from "@store/GitHubStore/types";
+import { RepoItemModel } from "@models/gitHub"
 import RepoTileStyle from "./RepoTile.module.scss";
 
 type RepoTileProps = {
-  item: RepoItem;
-  _onClick: (it: RepoItem) => void;
+  item: RepoItemModel;
+  _onClick: (it: RepoItemModel) => void;
 }
 
 const RepoTile: React.FC<RepoTileProps> = ({ item, _onClick }) => {

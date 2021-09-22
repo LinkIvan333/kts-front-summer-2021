@@ -2,32 +2,32 @@ import ReposSearchPageStyle from "./ReposSearchPage.module.scss";
 import Input from "@components/Input";
 import Button from "@components/Button";
 import SearchIcon from "@components/SearchIcon";
-import RepoTileDrawer from "@pages/ReposSearchPage/components/RepoTileDrawer"
 import RepoBranchesDrawer from "@components/RepoBranchesDrawer";
 import React from "react";
-import GitHubStore from "@store/GitHubStore/GitHubStore";
-import { RepoItem } from "@store/GitHubStore/types";
 import { MAIN_CONST, ROUTES } from "@config/config";
-import { Route } from "react-router-dom";
-
-
-const gitHubStore = new GitHubStore();
+import { Link, Route } from "react-router-dom";
+import RepoTile from "@components/RepoTile";
+import { observer } from "mobx-react";
+import GitHubStore from "@store/GitHubStore";
+import { RepoItemModel } from "@models/gitHub";
+import { useLocalStore } from "@utils/useLocalStore/useLocalStore";
 
 const ReposContext = React.createContext({
-  list: [] as RepoItem[], isLoading: false, load: (e: boolean) => {
+  list: [] as RepoItemModel[], isLoading: false, load: (e: boolean) => {
   }
 });
 
-const Provider = ReposContext.Provider;
+//const Provider = ReposContext.Provider;
 export const useReposContext = () => React.useContext(ReposContext);
 
 const ReposSearchPage = () => {
 
   const [value, setValue] = React.useState("");
   const [isLoading, load] = React.useState(false);
-  const [list, setList] = React.useState<RepoItem[]>([]);
-  const [selectedRepo, setSelectedRepo] = React.useState<null | RepoItem>(null);
+
+  const [selectedRepo, setSelectedRepo] = React.useState<null | RepoItemModel>(null);
   const [visible, setVisible] = React.useState(false);
+  const ReposListStore = useLocalStore(() => new GitHubStore());
 
   const showDrawer = React.useCallback(() => {
     setVisible(true);
@@ -46,47 +46,47 @@ const ReposSearchPage = () => {
     const getRepos = async () => {
       try {
         load(true);
-        await gitHubStore.getOrganizationReposList({
+        await ReposListStore.getOrganizationReposList({
           organizationName: value
-        }).then(result => {
-          if (result.success) {
-            load(false);
-            setList(result.data)
-          } else {
-            load(false);
-          }
         });
+        load(false);
       } catch (err) {
 
       }
     };
 
     getRepos();
-  }, [value]);
+  }, [value, ReposListStore]);
 
   const RepoBranchesDrawerShower = () => {
     return (
-      <RepoBranchesDrawer selectedRepo={selectedRepo} onClose={onClose} visible={visible}/>
-    )
-  }
-
-  const handleCardClick = (element: RepoItem) => {
-    setSelectedRepo(element);
-    showDrawer();
+      <RepoBranchesDrawer selectedRepo={selectedRepo} onClose={onClose} visible={visible} />
+    );
   };
 
+  const handleCardClick = React.useCallback((element: RepoItemModel) => {
+    setSelectedRepo(element);
+    showDrawer();
+  }, [showDrawer]);
+
   return (
-    <Provider value={{list, isLoading, load}}>
-      <div className={ReposSearchPageStyle.grid}>
-        <div className={ReposSearchPageStyle.searchLine}>
-          <Input placeholder={MAIN_CONST.PLACEHOLDER} onChange={handleKeyboard} value={value} />
-          <Button onClick={handleClick} disabled={isLoading} type={"submit"}><SearchIcon /></Button>
-        </div>
-        <RepoTileDrawer onClick={handleCardClick} />
-        <Route path={ROUTES.repos.create(":id")} component={RepoBranchesDrawerShower} />
+
+    <div className={ReposSearchPageStyle.grid}>
+      <div className={ReposSearchPageStyle.searchLine}>
+        <Input placeholder={MAIN_CONST.PLACEHOLDER} onChange={handleKeyboard} value={value} />
+        <Button onClick={handleClick} disabled={isLoading} type={"submit"}><SearchIcon /></Button>
       </div>
-    </Provider>
+      {ReposListStore.list.map((element) => {
+        return (
+          <Link to={ROUTES.repos.create(element.id)} key={element.id}>
+            <RepoTile item={element} _onClick={handleCardClick} />
+          </Link>
+        );
+      })}
+      <Route path={ROUTES.repos.create(":id")} component={RepoBranchesDrawerShower} />
+    </div>
+
   );
 };
 
-export default ReposSearchPage;
+export default observer(ReposSearchPage);

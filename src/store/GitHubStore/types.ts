@@ -15,8 +15,6 @@ export type GetOrganizationReposListParams = {
 
 export type GetOrganizationRepoBranchesParams = {
   id: string;
-  // organizationName: string;
-  // repoName: string;
 }
 
 export type ApiResp<RepoItem> = {
@@ -25,20 +23,11 @@ export type ApiResp<RepoItem> = {
   status: number
 }
 
-export type RepoItem = {
-  id: number,
-  avatarUrl: string,
-  name: string,
-  owner: string,
-  stars: number,
-  updated: string
-}
-
 export type BranchItem = {
   name: string,
   uuid: string
 }
 
 export interface IGitHubStore {
-  getOrganizationReposList(params: GetOrganizationReposListParams): Promise<ApiResp<RepoItem[]>>;
+  getOrganizationReposList(params: GetOrganizationReposListParams): Promise<void>;
 }

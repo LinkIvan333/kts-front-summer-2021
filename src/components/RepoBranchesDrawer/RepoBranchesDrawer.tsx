@@ -1,16 +1,17 @@
 import RepoBranchesDrawerStyle from "./RepoBranchesDrawer.module.scss";
 import "@config/config";
 import React from "react";
-import { RepoItem, BranchItem } from "@store/GitHubStore/types";
+import { BranchItem } from "@store/GitHubStore/types";
 import GitHubStore from "@store/GitHubStore/GitHubStore";
 import { Drawer } from "antd";
 import { MAIN_CONST } from "@config/config";
 import { useParams } from "react-router-dom";
+import { RepoItemModel } from "@models/gitHub"
 
 const gitHubStore = new GitHubStore();
 
 type RepoBranchesDrawerProps = {
-  selectedRepo: RepoItem | null,
+  selectedRepo: RepoItemModel | null,
   onClose: () => void;
   visible: boolean;
 }
