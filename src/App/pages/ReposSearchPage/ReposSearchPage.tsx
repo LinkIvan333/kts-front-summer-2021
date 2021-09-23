@@ -8,7 +8,7 @@ import { MAIN_CONST, ROUTES } from "@config/config";
 import { Link, Route } from "react-router-dom";
 import RepoTile from "@components/RepoTile";
 import { observer } from "mobx-react";
-import GitHubStore from "@store/GitHubStore";
+import ReposListStore from "@store/ReposListStore";
 import { RepoItemModel } from "@models/gitHub";
 import { useLocalStore } from "@utils/useLocalStore/useLocalStore";
 
@@ -25,9 +25,8 @@ const ReposSearchPage = () => {
   const [value, setValue] = React.useState("");
   const [isLoading, load] = React.useState(false);
 
-  const [selectedRepo, setSelectedRepo] = React.useState<null | RepoItemModel>(null);
   const [visible, setVisible] = React.useState(false);
-  const ReposListStore = useLocalStore(() => new GitHubStore());
+  const ReposListStoreLocal = useLocalStore(() => new ReposListStore());
 
   const showDrawer = React.useCallback(() => {
     setVisible(true);
@@ -35,7 +34,6 @@ const ReposSearchPage = () => {
 
   const onClose = React.useCallback(() => {
     setVisible(false);
-    setSelectedRepo(null);
   }, []);
 
   const handleKeyboard = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +44,7 @@ const ReposSearchPage = () => {
     const getRepos = async () => {
       try {
         load(true);
-        await ReposListStore.getOrganizationReposList({
+        await ReposListStoreLocal.getOrganizationReposList({
           organizationName: value
         });
         load(false);
@@ -56,16 +54,15 @@ const ReposSearchPage = () => {
     };
 
     getRepos();
-  }, [value, ReposListStore]);
+  }, [value, ReposListStoreLocal]);
 
   const RepoBranchesDrawerShower = () => {
     return (
-      <RepoBranchesDrawer selectedRepo={selectedRepo} onClose={onClose} visible={visible} />
+      <RepoBranchesDrawer onClose={onClose} visible={visible} />
     );
   };
 
   const handleCardClick = React.useCallback((element: RepoItemModel) => {
-    setSelectedRepo(element);
     showDrawer();
   }, [showDrawer]);
 
@@ -76,7 +73,7 @@ const ReposSearchPage = () => {
         <Input placeholder={MAIN_CONST.PLACEHOLDER} onChange={handleKeyboard} value={value} />
         <Button onClick={handleClick} disabled={isLoading} type={"submit"}><SearchIcon /></Button>
       </div>
-      {ReposListStore.list.map((element) => {
+      {ReposListStoreLocal.list.map((element) => {
         return (
           <Link to={ROUTES.repos.create(element.id)} key={element.id}>
             <RepoTile item={element} _onClick={handleCardClick} />

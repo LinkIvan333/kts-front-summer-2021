@@ -12,13 +12,12 @@ const RepoTile: React.FC<RepoTileProps> = ({ item, _onClick }) => {
   const onClick = (e: React.MouseEvent) => {
     _onClick(item);
   }
-
   return (
     <div className={RepoTileStyle.box} onClick={onClick}>
-      <Avatar src={item.avatarUrl} letter={item.name.charAt(0).toUpperCase()} />
+      <Avatar src={item.owner.avatarUrl} letter={item.name.charAt(0).toUpperCase()} />
       <div className={RepoTileStyle.gitCard}>
         <span className={RepoTileStyle.gitNameCard}>{item.name}</span>
-        <span className={RepoTileStyle.gitCompanyCard}>{item.owner}</span>
+        <span className={RepoTileStyle.gitCompanyCard}>{item.owner.login}</span>
         <StarIcon />
         <span className={RepoTileStyle.gitViewsCard}>{item.stars}</span>
         <span className={RepoTileStyle.gitDateCard}>{item.updated}</span>

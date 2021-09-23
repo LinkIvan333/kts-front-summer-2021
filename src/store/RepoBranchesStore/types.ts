@@ -28,6 +28,3 @@ export type BranchItem = {
   uuid: string
 }
 
-export interface IGitHubStore {
-  getOrganizationReposList(params: GetOrganizationReposListParams): Promise<void>;
-}

@@ -1,5 +1,4 @@
 import { ApiResponse, IApiStore, RequestParams, HTTPMethod, StatusHTTP } from "./types";
-import dayjs from "dayjs";
 const qs = require("qs");
 
 export default class ApiStore implements IApiStore {
