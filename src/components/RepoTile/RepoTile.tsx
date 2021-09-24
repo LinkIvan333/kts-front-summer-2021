@@ -2,6 +2,7 @@ import StarIcon from "@components/StarIcon";
 import Avatar from "@components/Avatar";
 import { RepoItemModel } from "@models/gitHub"
 import RepoTileStyle from "./RepoTile.module.scss";
+import React from "react";
 
 type RepoTileProps = {
   item: RepoItemModel;
@@ -26,4 +27,4 @@ const RepoTile: React.FC<RepoTileProps> = ({ item, _onClick }) => {
   );
 };
 
-export default RepoTile;
+export default React.memo(RepoTile);

@@ -3,6 +3,8 @@ import Input from "@components/Input";
 import Button from "@components/Button";
 import SearchIcon from "@components/SearchIcon";
 import RepoBranchesDrawer from "@components/RepoBranchesDrawer";
+import Loader from "@components/Loader";
+import ErrorThrower from "@components/ErrorThrower"
 import React from "react";
 import { MAIN_CONST, ROUTES } from "@config/config";
 import { Link, Route } from "react-router-dom";
@@ -11,22 +13,13 @@ import { observer } from "mobx-react";
 import ReposListStore from "@store/ReposListStore";
 import { RepoItemModel } from "@models/gitHub";
 import { useLocalStore } from "@utils/useLocalStore/useLocalStore";
-
-const ReposContext = React.createContext({
-  list: [] as RepoItemModel[], isLoading: false, load: (e: boolean) => {
-  }
-});
-
-//const Provider = ReposContext.Provider;
-export const useReposContext = () => React.useContext(ReposContext);
+import { Meta } from "@utils/meta";
 
 const ReposSearchPage = () => {
 
-  const [value, setValue] = React.useState("");
-  const [isLoading, load] = React.useState(false);
-
-  const [visible, setVisible] = React.useState(false);
   const ReposListStoreLocal = useLocalStore(() => new ReposListStore());
+  const [value, setValue] = React.useState("");
+  const [visible, setVisible] = React.useState(false);
 
   const showDrawer = React.useCallback(() => {
     setVisible(true);
@@ -43,11 +36,9 @@ const ReposSearchPage = () => {
   const handleClick = React.useCallback(() => {
     const getRepos = async () => {
       try {
-        load(true);
         await ReposListStoreLocal.getOrganizationReposList({
           organizationName: value
         });
-        load(false);
       } catch (err) {
 
       }
@@ -67,22 +58,24 @@ const ReposSearchPage = () => {
   }, [showDrawer]);
 
   return (
-
     <div className={ReposSearchPageStyle.grid}>
       <div className={ReposSearchPageStyle.searchLine}>
         <Input placeholder={MAIN_CONST.PLACEHOLDER} onChange={handleKeyboard} value={value} />
-        <Button onClick={handleClick} disabled={isLoading} type={"submit"}><SearchIcon /></Button>
+        <Button onClick={handleClick} disabled={ReposListStoreLocal.meta} type={"submit"}><SearchIcon /></Button>
       </div>
-      {ReposListStoreLocal.list.map((element) => {
-        return (
-          <Link to={ROUTES.repos.create(element.id)} key={element.id}>
-            <RepoTile item={element} _onClick={handleCardClick} />
-          </Link>
-        );
-      })}
+      {ReposListStoreLocal.meta === Meta.error && <ErrorThrower />}
+      {ReposListStoreLocal.meta === Meta.loading && <Loader />}
+      {ReposListStoreLocal.meta !== (Meta.loading || Meta.error) &&
+      <>
+        {ReposListStoreLocal.list.map((element) => {
+          return (
+            <Link to={ROUTES.repos.create(element.id)} key={element.id}>
+              <RepoTile item={element} _onClick={handleCardClick} />
+            </Link>
+          );
+        })}</>}
       <Route path={ROUTES.repos.create(":id")} component={RepoBranchesDrawerShower} />
     </div>
-
   );
 };
 

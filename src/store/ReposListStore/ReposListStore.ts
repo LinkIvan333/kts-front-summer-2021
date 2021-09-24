@@ -17,7 +17,7 @@ type PrivateFields = "_list" | "_meta";
 export default class ReposListStore implements ILocalStore {
   private _list: CollectionModel<number, RepoItemModel> = getInitialCollectionModel();
   private _meta: Meta = Meta.initial;
-  private readonly apiStore = new ApiStore("https://api.github.com/");
+  private readonly apiStore = new ApiStore<RepoItemApi[]>("https://api.github.com/");
 
   constructor() {
     makeObservable<ReposListStore, PrivateFields>(this, {
@@ -40,7 +40,7 @@ export default class ReposListStore implements ILocalStore {
   async getOrganizationReposList(params: GetOrganizationReposListParams): Promise<void> {
     this._meta = Meta.loading;
     this._list = getInitialCollectionModel();
-    const result = await this.apiStore.request<RepoItemApi[]>({
+    await this.apiStore.request({
       data: {},
       endpoint: ENDPOINTS.gitRepoListApi.create(params.organizationName),
       headers: {},
@@ -48,10 +48,10 @@ export default class ReposListStore implements ILocalStore {
     });
 
     runInAction(() => {
-      if (result.success) {
+      if (this.apiStore.success) {
         try {
           this._meta = Meta.success;
-          this._list = normalizeCollection(result.data.map((element) => {
+          this._list = normalizeCollection(this.apiStore.data.map((element) => {
             return normalizeRepoItem(element);
           }), (listItem) => listItem.id);
           return;

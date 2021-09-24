@@ -21,7 +21,8 @@ type PrivateFields = "_branches" | "_meta";
 export default class RepoBranchesStore implements ILocalStore {
   private _branches: CollectionModel<string, BranchItemModel> = getInitialCollectionModel();
   private _meta: Meta = Meta.initial;
-  private readonly apiStore = new ApiStore("https://api.github.com/");
+
+  private readonly apiStore = new ApiStore<BranchItemApi[]>("https://api.github.com/");
 
   constructor() {
     makeObservable<RepoBranchesStore, PrivateFields>(this, {
@@ -45,7 +46,7 @@ export default class RepoBranchesStore implements ILocalStore {
   async getOrganizationRepoBranches(params: GetOrganizationRepoBranchesParams): Promise<void> {
     this._meta = Meta.loading;
     this._branches = getInitialCollectionModel();
-    const result = await this.apiStore.request<BranchItemApi[]>({
+    await this.apiStore.request({
       data: {},
       endpoint: ENDPOINTS.gitBranchesApi.create(params.id),
       headers: {},
@@ -53,10 +54,10 @@ export default class RepoBranchesStore implements ILocalStore {
     });
 
     runInAction(() => {
-      if (result.success) {
+      if (this.apiStore.success) {
         try {
           this._meta = Meta.success;
-          this._branches = normalizeCollection(result.data.map((element) => {
+          this._branches = normalizeCollection(this.apiStore.data.map((element) => {
             return normalizeBranchItem(element);
           }), (listItem) => listItem.uuid);
           return;

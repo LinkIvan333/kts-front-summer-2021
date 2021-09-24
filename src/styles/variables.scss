@@ -9,6 +9,7 @@ $first-letter-color: var(--first-letter-color);
 $company-hover-color: var(--company-hover-color);
 $grid-left-top-margin: var(--grid-left-top-margin);
 $branches-drawer-font-size: var(--branches-drawer-font-size);
+$error-thrower-font-size: var(--error-thrower-font-size);
 
 * {
   --main-bg-color: #FF5555;
@@ -22,4 +23,5 @@ $branches-drawer-font-size: var(--branches-drawer-font-size);
   --company-hover-color: #208FBF;
   --grid-left-top-margin: 20px;
   --branches-drawer-font-size: 14px;
+  --error-thrower-font-size: 24px;
 }

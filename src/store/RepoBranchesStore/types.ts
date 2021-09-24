@@ -16,15 +16,3 @@ export type GetOrganizationReposListParams = {
 export type GetOrganizationRepoBranchesParams = {
   id: string;
 }
-
-export type ApiResp<RepoItem> = {
-  success: boolean;
-  data: RepoItem;
-  status: number
-}
-
-export type BranchItem = {
-  name: string,
-  uuid: string
-}
-
