@@ -6,12 +6,12 @@ import React from "react";
 
 type RepoTileProps = {
   item: RepoItemModel;
-  _onClick: (it: RepoItemModel) => void;
+  _onClick: (id: number) => void;
 }
 
 const RepoTile: React.FC<RepoTileProps> = ({ item, _onClick }) => {
   const onClick = (e: React.MouseEvent) => {
-    _onClick(item);
+    _onClick(item.id);
   }
   return (
     <div className={RepoTileStyle.box} onClick={onClick}>

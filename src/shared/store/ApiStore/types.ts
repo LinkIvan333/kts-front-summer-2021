@@ -28,3 +28,15 @@ export enum StatusHTTP {
   NOT_FOUND = 404,
   BAD_GATEWAY = 502
 }
+
+export type ApiResponse<SuccessT, ErrorT> =
+  | {
+  success: true;
+  data: SuccessT;
+  status: StatusHTTP;
+}
+  | {
+  success: false;
+  data: ErrorT;
+  status: StatusHTTP;
+};

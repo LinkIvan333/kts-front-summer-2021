@@ -5,7 +5,7 @@ export const MAIN_CONST = {
 
 export const ROUTES = {
   repos: {
-    mask: "/repos/",
+    mask: "/repos",
     create: (id:number | string): string => `/repos/${id}`
   }
 };

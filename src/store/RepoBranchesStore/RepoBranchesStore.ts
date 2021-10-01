@@ -46,7 +46,7 @@ export default class RepoBranchesStore implements ILocalStore {
   async getOrganizationRepoBranches(params: GetOrganizationRepoBranchesParams): Promise<void> {
     this._meta = Meta.loading;
     this._branches = getInitialCollectionModel();
-    await this.apiStore.request({
+    const response = await this.apiStore.request({
       data: {},
       endpoint: ENDPOINTS.gitBranchesApi.create(params.id),
       headers: {},
@@ -54,10 +54,10 @@ export default class RepoBranchesStore implements ILocalStore {
     });
 
     runInAction(() => {
-      if (this.apiStore.success) {
+      if (response.success) {
         try {
           this._meta = Meta.success;
-          this._branches = normalizeCollection(this.apiStore.data.map((element) => {
+          this._branches = normalizeCollection(response.data.map((element) => {
             return normalizeBranchItem(element);
           }), (listItem) => listItem.uuid);
           return;

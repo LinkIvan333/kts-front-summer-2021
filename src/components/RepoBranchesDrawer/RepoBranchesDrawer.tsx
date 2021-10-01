@@ -10,18 +10,17 @@ import { observer } from "mobx-react";
 
 type RepoBranchesDrawerProps = {
   onClose: () => void;
-  visible: boolean;
 }
 
-const RepoBranchesDrawer: React.FC<RepoBranchesDrawerProps> = ({ onClose, visible }) => {
+const RepoBranchesDrawer: React.FC<RepoBranchesDrawerProps> = ({ onClose }) => {
   const { id } = useParams<{ id: string }>();
-  const RepoBranchesStoreLocal = useLocalStore(() => new RepoBranchesStore());
+  const repoBranchesStoreLocal = useLocalStore(() => new RepoBranchesStore());
 
   React.useEffect(() => {
     const getBranches = async () => {
       try {
         if (id !== undefined) {
-          await RepoBranchesStoreLocal.getOrganizationRepoBranches({
+          await repoBranchesStoreLocal.getOrganizationRepoBranches({
             id: id
           });
         }
@@ -31,7 +30,7 @@ const RepoBranchesDrawer: React.FC<RepoBranchesDrawerProps> = ({ onClose, visibl
     };
 
     getBranches();
-  }, [id, RepoBranchesStoreLocal]);
+  }, [id, repoBranchesStoreLocal]);
 
     return (
       <Drawer
@@ -39,10 +38,10 @@ const RepoBranchesDrawer: React.FC<RepoBranchesDrawerProps> = ({ onClose, visibl
         placement="right"
         closable={false}
         onClose={onClose}
-        visible={visible}
+        visible={true}
       >
         {
-          RepoBranchesStoreLocal.branches.map((element) => {
+          repoBranchesStoreLocal.branches.map((element) => {
             return (
               <p key={element.uuid} className={RepoBranchesDrawerStyle.sp}>• {element.name}</p>
             );
