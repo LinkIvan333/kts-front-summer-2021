@@ -1,19 +1,19 @@
-import ApiStore from "@shared/ApiStore";
+import ApiStore from "shared/store/ApiStore";
 import {
   GetOrganizationRepoBranchesParams,
   HTTPMethod,
 } from "./types";
-import { ENDPOINTS } from "@config/config";
-import { ILocalStore } from "@utils/useLocalStore/useLocalStore";
-import { Meta } from "@utils/meta";
+import { ENDPOINTS } from "config/config";
+import { ILocalStore } from "utils/useLocalStore/useLocalStore";
+import { Meta } from "utils/meta";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 import {
   CollectionModel,
   getInitialCollectionModel,
   linearizeCollection,
   normalizeCollection
-} from "@models/shared/collections";
-import { BranchItemModel, BranchItemApi, normalizeBranchItem } from "@models/gitHub/branchItem";
+} from "models/shared/collections";
+import { BranchItemModel, BranchItemApi, normalizeBranchItem } from "models/gitHub/branchItem";
 
 
 type PrivateFields = "_branches" | "_meta";

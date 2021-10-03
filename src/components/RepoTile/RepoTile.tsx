@@ -1,6 +1,6 @@
-import StarIcon from "@components/StarIcon";
-import Avatar from "@components/Avatar";
-import { RepoItemModel } from "@models/gitHub"
+import StarIcon from "components/StarIcon";
+import Avatar from "components/Avatar";
+import { RepoItemModel } from "models/gitHub"
 import RepoTileStyle from "./RepoTile.module.scss";
 import React from "react";
 

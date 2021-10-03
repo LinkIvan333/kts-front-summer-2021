@@ -1,11 +1,11 @@
 import RepoBranchesDrawerStyle from "./RepoBranchesDrawer.module.scss";
-import "@config/config";
+import "config/config";
 import React from "react";
-import RepoBranchesStore from "@store/RepoBranchesStore/RepoBranchesStore";
+import RepoBranchesStore from "store/RepoBranchesStore/RepoBranchesStore";
 import { Drawer } from "antd";
-import { MAIN_CONST } from "@config/config";
+import { MAIN_CONST } from "config/config";
 import { useParams } from "react-router-dom";
-import { useLocalStore } from "@utils/useLocalStore/useLocalStore";
+import { useLocalStore } from "utils/useLocalStore/useLocalStore";
 import { observer } from "mobx-react";
 
 type RepoBranchesDrawerProps = {

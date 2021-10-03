@@ -1,16 +1,16 @@
-import { GetOrganizationReposListParams, HTTPMethod } from "@store/RepoBranchesStore/types";
-import { ILocalStore } from "@utils/useLocalStore/useLocalStore";
+import { GetOrganizationReposListParams, HTTPMethod } from "store/RepoBranchesStore/types";
+import { ILocalStore } from "utils/useLocalStore/useLocalStore";
 import {
   CollectionModel,
   getInitialCollectionModel,
   linearizeCollection,
   normalizeCollection
-} from "@models/shared/collections";
-import { normalizeRepoItem, RepoItemApi, RepoItemModel } from "@models/gitHub";
-import { Meta } from "@utils/meta";
-import ApiStore from "@shared/ApiStore";
+} from "models/shared/collections";
+import { normalizeRepoItem, RepoItemApi, RepoItemModel } from "models/gitHub";
+import { Meta } from "utils/meta";
+import ApiStore from "shared/store/ApiStore";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
-import { ENDPOINTS } from "@config/config";
+import { ENDPOINTS } from "config/config";
 
 type PrivateFields = "_list" | "_meta";
 
