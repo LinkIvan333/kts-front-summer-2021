@@ -1,0 +1,6 @@
+@import "src/styles/variables.scss";
+
+.errorSpan {
+  font-weight: 800;
+  font-size: $error-thrower-font-size;
+}

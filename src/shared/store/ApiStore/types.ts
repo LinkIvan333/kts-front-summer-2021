@@ -29,7 +29,6 @@ export enum StatusHTTP {
   BAD_GATEWAY = 502
 }
 
-// Ответ API
 export type ApiResponse<SuccessT, ErrorT> =
   | {
   success: true;
@@ -41,12 +40,3 @@ export type ApiResponse<SuccessT, ErrorT> =
   data: ErrorT;
   status: StatusHTTP;
 };
-
-// Интерфейс для класса, с помощью которого можно делать запросы к API
-export interface IApiStore {
-  // базовый url для выполнения запросов. TODO: указать url GitHub API в классе ApiStore
-  readonly baseUrl: string;
-
-  // Метод, с помощью которого делается запрос. TODO: реализовать в классе ApiStore
-  request<SuccessT, ErrorT = any, ReqT = {}>(params: RequestParams<ReqT>): Promise<ApiResponse<SuccessT, ErrorT>>;
-}

@@ -1,15 +1,20 @@
-import { ApiResponse, IApiStore, RequestParams, HTTPMethod, StatusHTTP } from "./types";
+import { RequestParams, HTTPMethod, StatusHTTP, ApiResponse } from "./types";
+import * as qs from "qs";
+import { ILocalStore } from "@utils/useLocalStore/useLocalStore";
+import { action, makeObservable } from "mobx";
 
-const qs = require("qs");
 
-export default class ApiStore implements IApiStore {
+export default class ApiStore<SuccessT, ErrorT = any> implements ILocalStore {
   readonly baseUrl: string;
 
   constructor(baseUrl: string = "") {
     this.baseUrl = baseUrl;
+    makeObservable<ApiStore<SuccessT, ErrorT>>(this, {
+      request: action
+    });
   }
 
-  async request<SuccessT, ErrorT = any, ReqT = {}>(params: RequestParams<ReqT>): Promise<ApiResponse<SuccessT, ErrorT>> {
+  async request<ReqT = {}>(params: RequestParams<ReqT>): Promise<ApiResponse<SuccessT, ErrorT>> {
     try {
       const headers = { ...params.headers };
       headers["Content-type"] = "application/json; charset=utf-8";
@@ -37,5 +42,9 @@ export default class ApiStore implements IApiStore {
         status: StatusHTTP.UNEXPECTED_ERROR
       };
     }
+  }
+
+  destroy(): void {
+
   }
 }

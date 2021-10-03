@@ -1,34 +1,27 @@
 import RepoBranchesDrawerStyle from "./RepoBranchesDrawer.module.scss";
 import "@config/config";
 import React from "react";
-import { RepoItem, BranchItem } from "@store/GitHubStore/types";
-import GitHubStore from "@store/GitHubStore/GitHubStore";
+import RepoBranchesStore from "@store/RepoBranchesStore/RepoBranchesStore";
 import { Drawer } from "antd";
 import { MAIN_CONST } from "@config/config";
 import { useParams } from "react-router-dom";
-
-const gitHubStore = new GitHubStore();
+import { useLocalStore } from "@utils/useLocalStore/useLocalStore";
+import { observer } from "mobx-react";
 
 type RepoBranchesDrawerProps = {
-  selectedRepo: RepoItem | null,
   onClose: () => void;
-  visible: boolean;
 }
 
-const RepoBranchesDrawer: React.FC<RepoBranchesDrawerProps> = ({ selectedRepo, onClose, visible }) => {
-  const [list, setList] = React.useState<BranchItem[]>([]);
+const RepoBranchesDrawer: React.FC<RepoBranchesDrawerProps> = ({ onClose }) => {
   const { id } = useParams<{ id: string }>();
+  const repoBranchesStoreLocal = useLocalStore(() => new RepoBranchesStore());
 
   React.useEffect(() => {
     const getBranches = async () => {
       try {
         if (id !== undefined) {
-          await gitHubStore.getOrganizationRepoBranches({
+          await repoBranchesStoreLocal.getOrganizationRepoBranches({
             id: id
-          }).then(result => {
-            if (result.success) {
-              setList(result.data);
-            }
           });
         }
       } catch (err) {
@@ -36,29 +29,25 @@ const RepoBranchesDrawer: React.FC<RepoBranchesDrawerProps> = ({ selectedRepo, o
       }
     };
     
-    setList([]);
     getBranches();
-  }, [id]);
+  }, [id, repoBranchesStoreLocal]);
   
-  if (selectedRepo != null) {
     return (
       <Drawer
         title={`${MAIN_CONST.SIDE_NAME_REPO} `}
         placement="right"
         closable={false}
         onClose={onClose}
-        visible={visible}
+        visible={true}
       >
         {
-          list.map((element) => {
+          repoBranchesStoreLocal.branches.map((element) => {
             return (
               <p key={element.uuid} className={RepoBranchesDrawerStyle.sp}>• {element.name}</p>
             );
           })
         }
       </Drawer>);
-  }
-  return null;
 };
 
-export default RepoBranchesDrawer;
+export default observer(RepoBranchesDrawer);
