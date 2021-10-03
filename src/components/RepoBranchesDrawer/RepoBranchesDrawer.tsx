@@ -28,10 +28,10 @@ const RepoBranchesDrawer: React.FC<RepoBranchesDrawerProps> = ({ onClose }) => {
 
       }
     };
-
+    
     getBranches();
   }, [id, repoBranchesStoreLocal]);
-
+  
     return (
       <Drawer
         title={`${MAIN_CONST.SIDE_NAME_REPO} `}
