@@ -1,3 +1,4 @@
+import React from "react";
 import ErrorThrowerStyle from "./ErrorThrower.module.scss";
 
 const ErrorThrower = () => {

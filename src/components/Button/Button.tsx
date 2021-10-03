@@ -1,6 +1,6 @@
 import ButtonStyle from "./Button.module.scss";
 import React from "react";
-import { Meta } from "@utils/meta";
+import { Meta } from "utils/meta";
 
 type ButtonProps = {
   children: React.ReactNode;

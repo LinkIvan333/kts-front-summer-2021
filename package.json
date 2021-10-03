@@ -1,64 +1,60 @@
 {
-  "name": "my-cra",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@react-navigation/drawer": "^6.1.4",
-    "@react-navigation/native": "^6.0.2",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
+  "name": "app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "npx webpack serve --mode=development",
+    "build": "NODE_ENV=production npx webpack --mode=production",
+    "ts-check": "tsc --skipLibCheck --noEmit --project tsconfig.json"
+  },
+  "browserslist": [
+    "last 2 chrome versions"
+  ],
+  "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.5",
+    "@babel/plugin-proposal-optional-chaining": "^7.14.5",
+    "@babel/preset-env": "^7.15.6",
+    "@babel/preset-react": "^7.14.5",
+    "@babel/preset-typescript": "^7.15.0",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.1",
     "@types/qs": "^6.9.7",
-    "@types/react": "^17.0.19",
+    "@types/react": "^17.0.26",
     "@types/react-dom": "^17.0.9",
-    "@types/react-router-dom": "^5.1.8",
-    "@vkontakte/icons": "^1.128.1",
-    "@vkontakte/vk-bridge": "^2.4.8",
-    "@vkontakte/vkui": "^4.16.0",
+    "@types/react-router": "^5.1.16",
+    "@types/react-router-dom": "^5.3.0",
+    "@types/webpack-env": "^1.16.2",
+    "@types/uuid": "^8.3.1",
+    "autoprefixer": "^10.3.6",
+    "babel-loader": "^8.2.2",
+    "babel-preset-mobx": "^2.0.0",
+    "css-loader": "^6.3.0",
+    "enhanced-resolve": "^5.8.3",
+    "fork-ts-checker-webpack-plugin": "^6.3.3",
+    "html-webpack-plugin": "^5.3.2",
+    "mini-css-extract-plugin": "^2.3.0",
+    "node-sass": "^6.0.1",
+    "postcss-loader": "^6.1.1",
+    "react-refresh": "^0.10.0",
+    "sass-loader": "^12.1.0",
+    "style-loader": "^3.3.0",
+    "typescript": "^4.4.3",
+    "webpack": "^5.56.0",
+    "webpack-cli": "^4.8.0",
+    "webpack-dev-server": "^4.3.0"
+  },
+  "dependencies": {
     "antd": "^4.16.13",
-    "dayjs": "^1.10.6",
+    "dayjs": "^1.10.7",
     "mobx": "^6.3.3",
     "mobx-react": "^7.2.0",
-    "qs": "^6.10.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-native-web": "^0.17.1",
     "react-router-dom": "^5.3.0",
-    "react-scripts": "4.0.3",
-    "sass": "^1.39.2",
-    "typescript": "^4.3.5",
-    "uuidv4": "^6.2.12"
+    "regenerator-runtime": "^0.13.9",
+    "uuid": "^8.3.2"
   },
-  "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
-    "lint": "eslint './src/**/*.{ts,tsx}'",
-    "lint:fix": "eslint './src/**/*.{ts,tsx}' --fix"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^3.4.1",
-    "prettier": "2.3.2",
-    "react-app-rewire-alias": "^1.0.3",
-    "react-app-rewired": "^2.1.8"
-  }
+  "repository": "https://github.com/LinkIvan333/kts-front-summer-2021.git",
+  "author": "linkivan333 <zamotaev.ivan@list.ru>"
 }

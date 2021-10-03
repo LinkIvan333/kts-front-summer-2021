@@ -1,18 +1,18 @@
 import ReposSearchPageStyle from "./ReposSearchPage.module.scss";
-import Input from "@components/Input";
-import Button from "@components/Button";
-import SearchIcon from "@components/SearchIcon";
-import RepoBranchesDrawer from "@components/RepoBranchesDrawer";
-import Loader from "@components/Loader";
-import ErrorThrower from "@components/ErrorThrower"
+import Input from "components/Input";
+import Button from "components/Button";
+import SearchIcon from "components/SearchIcon";
+import RepoBranchesDrawer from "components/RepoBranchesDrawer";
+import Loader from "components/Loader";
+import ErrorThrower from "components/ErrorThrower"
 import React from "react";
-import { MAIN_CONST, ROUTES } from "@config/config";
+import { MAIN_CONST, ROUTES } from "config/config";
 import { Link, Route, useHistory } from "react-router-dom";
-import RepoTile from "@components/RepoTile";
+import RepoTile from "components/RepoTile";
 import { observer } from "mobx-react";
-import ReposListStore from "@store/ReposListStore";
-import { useLocalStore } from "@utils/useLocalStore/useLocalStore";
-import { Meta } from "@utils/meta";
+import ReposListStore from "store/ReposListStore";
+import { useLocalStore } from "utils/useLocalStore/useLocalStore";
+import { Meta } from "utils/meta";
 
 const ReposSearchPage = () => {
 

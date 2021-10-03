@@ -1,6 +1,6 @@
 import { RequestParams, HTTPMethod, StatusHTTP, ApiResponse } from "./types";
 import * as qs from "qs";
-import { ILocalStore } from "@utils/useLocalStore/useLocalStore";
+import { ILocalStore } from "utils/useLocalStore/useLocalStore";
 import { action, makeObservable } from "mobx";
 
 
@@ -38,7 +38,7 @@ export default class ApiStore<SuccessT, ErrorT = any> implements ILocalStore {
     } catch (e) {
       return {
         success: false,
-        data: e,
+        data: e as ErrorT,
         status: StatusHTTP.UNEXPECTED_ERROR
       };
     }
