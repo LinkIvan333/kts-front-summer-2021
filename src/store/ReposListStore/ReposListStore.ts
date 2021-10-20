@@ -27,6 +27,9 @@ export default class ReposListStore implements ILocalStore {
       list: computed,
       meta: computed
     });
+    this.getOrganizationReposList({
+      organizationName: "ktsstudio"
+    });
   }
 
   get list(): RepoItemModel[] {

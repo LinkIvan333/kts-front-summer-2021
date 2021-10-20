@@ -3,12 +3,13 @@ import React from "react";
 
 type InputProps = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown: (e: React.KeyboardEvent) => void;
   placeholder?: string;
   value: string;
   type?: string;
 }
 
-const Input: React.FC<InputProps> = ({ value, placeholder, onChange, type }) => {
+const Input: React.FC<InputProps> = ({ value, placeholder, onChange, onKeyDown, type }) => {
 
   return (
     <input
@@ -16,6 +17,7 @@ const Input: React.FC<InputProps> = ({ value, placeholder, onChange, type }) => 
       className={InputStyle.gitName}
       placeholder={placeholder}
       onChange={onChange}
+      onKeyDown={onKeyDown}
       value={value} />
   );
 };

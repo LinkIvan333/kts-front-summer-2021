@@ -1,16 +1,18 @@
 @import "src/styles/variables.scss";
 
 .grid {
-    margin: $grid-left-top-margin 0 0 $grid-left-top-margin;
+    margin: $grid-left-top-margin auto;
     box-sizing: border-box;
     display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 16px;
-    width: 357px;
+    width: 70%;
 }
 
 .searchLine {
     height: 54px;
     width: 357px;
+    margin: $grid-left-top-margin auto;
     display: flex;
     justify-content: space-between;
 }
